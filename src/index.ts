@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
-// import couponRouter from "./coupon/coupon.route.js";
 import couponRouter from './coupon/coupon.route.js';
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
@@ -12,6 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/coupon", couponRouter);
+
+app.get("/",(req:express.Request,res:express.Response)=>{
+  res.send("welcome")
+})
 
 const options = {
   definition: {
