@@ -57,7 +57,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 const server = app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         mongoose.set('strictQuery', true);
-        yield mongoose.connect("mongodb://mongo:MongoSushant0324@ac-avzb160-shard-00-00.neqduj8.mongodb.net:27017,ac-avzb160-shard-00-01.neqduj8.mongodb.net:27017,ac-avzb160-shard-00-02.neqduj8.mongodb.net:27017/coupon?ssl=true&replicaSet=atlas-t46owy-shard-0&authSource=admin&retryWrites=true&w=majority");
+        yield mongoose.connect(process.env.MONGODB_URL || "");
         console.log("Connected to MongoDB!");
     }
     catch (e) {
