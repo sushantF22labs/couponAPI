@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
-// custom imports
-import couponRouter from "./coupon.route.js";
+// import couponRouter from "./coupon/coupon.route.js";
+import couponRouter from './coupon/coupon.route.js';
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
 const PORT:any = process.env.PORT || 8000;
@@ -59,7 +59,7 @@ const server =  app.listen(PORT, async () => {
   } catch (e) {
     console.log("something went wrong with db");
   }
-  console.log(`http://localhost:${PORT}`);
+  console.log(`Our server is running at port number ${PORT}`);
 });
 
 export{server};

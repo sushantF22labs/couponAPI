@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/src/index.js",
-    "server": "nodemon ./dist/src/index.js",
-    "test": "mocha ./dist/src/test/test.js --timeout 10000"
+    "start": "node ./dist/index.js",
+    "server": "nodemon ./dist/index.js",
+    "test": "mocha ./dist/coupon/test.js --timeout 10000"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "mocha-typescript": "^1.1.17",
     "mongoose": "^6.8.0",
     "nodemon": "^2.0.20",
+    "superagent": "^3.8.3",
     "swagger-jsdoc": "^6.0.1",
     "swagger-ui-express": "^4.6.0"
   },

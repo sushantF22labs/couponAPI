@@ -1,7 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 const couponRouter = express.Router();
 import CouponModel from "./coupon.model.js";
-import { checkAllFields } from "./middleware/couponFields.js";
+// @ts-ignore
+import { checkAllFields } from "./couponFields.js";
 
 interface Data{
   couponCode:number,
@@ -51,11 +52,10 @@ interface Data{
  */
 
 couponRouter.get("/", async (req: Request, res: Response) => {
-  let { page, limit } = req.query;
-  // console.log(req.query.title);
-  // console.log(req.query.couponCode);
-  let page1=parseInt(page);
-  let limit1=parseInt(limit);
+  // let { skip, limit } = req.query;
+  let skip1:string  = req.query.skip;
+  let limit1:string = req.query.limit;
+ 
   console.log(req);
   try {
     if (req.query.title && req.query.couponCode) {
@@ -72,7 +72,8 @@ couponRouter.get("/", async (req: Request, res: Response) => {
       });
       res.send({ data: data });
     } else {
-      let data = await CouponModel.find().skip(page1).limit(limit1);
+   
+      let data = await CouponModel.find().skip(skip1).limit(limit1);
       let count:number = await CouponModel.find().count();
       res
         .status(200)
@@ -105,10 +106,10 @@ couponRouter.get("/", async (req: Request, res: Response) => {
 
 couponRouter.get("/:id", async (req, res) => {
   let { skip, limit } = req.query;
-  let page1=parseInt(skip);
-  let limit1=parseInt(limit);
+
   try {
-    const result = await CouponModel.findById(req.params.id).skip(page1).limit(limit1);
+    // @ts-ignore
+    const result = await CouponModel.findById(req.params.id).skip(skip).limit(limit);
     const count = await CouponModel.find().count();
     res
       .status(200)
