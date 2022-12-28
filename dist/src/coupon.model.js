@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
-const cuponSchema = new mongoose.Schema({
-    cuponCode: { type: String, required: true },
+const couponSchema = new mongoose.Schema({
+    couponCode: { type: Number, required: true, unique: true },
     expiry: { type: String, required: true },
     title: { type: String, required: true },
     description: [String],
     paymentMode: { type: String, required: true },
     discount: {
         percentage: { type: String, default: null },
-        amount: { type: String, default: null }
+        amount: { type: Number, default: null },
     },
 }, {
-    versionKey: false
+    versionKey: false,
 });
-const CuponModel = mongoose.model('cupon', cuponSchema);
-export default CuponModel;
+const CouponModel = mongoose.model("coupon", couponSchema);
+export default CouponModel;
