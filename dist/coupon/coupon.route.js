@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import express from "express";
 const couponRouter = express.Router();
 import CouponModel from "./coupon.model.js";
-const checkAllFields = (req, res, next) => void couponRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let skip1 = req.query.skip;
-    let limit1 = req.query.limit;
-    console.log(req);
+import checkAllFields from "./couponFields.js";
+couponRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let skip = Number(req.query.skip);
+    let limit = Number(req.query.limit);
     try {
         if (req.query.title && req.query.couponCode) {
             const data = yield CouponModel.find({
@@ -31,7 +31,7 @@ const checkAllFields = (req, res, next) => void couponRouter.get("/", (req, res)
             res.send({ data: data });
         }
         else {
-            let data = yield CouponModel.find().skip(skip1).limit(limit1);
+            let data = yield CouponModel.find().skip(skip).limit(limit);
             let count = yield CouponModel.find().count();
             res
                 .status(200)
@@ -44,7 +44,8 @@ const checkAllFields = (req, res, next) => void couponRouter.get("/", (req, res)
     }
 }));
 couponRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let { skip, limit } = req.query;
+    let skip = Number(req.query.skip);
+    let limit = Number(req.query.limit);
     try {
         const result = yield CouponModel.findById(req.params.id).skip(skip).limit(limit);
         const count = yield CouponModel.find().count();

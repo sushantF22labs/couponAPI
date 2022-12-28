@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import { Data } from "./coupon.types";
 const couponSchema = new mongoose.Schema(
   {
     couponCode: { type: Number, required: true, unique: true },
@@ -17,5 +17,5 @@ const couponSchema = new mongoose.Schema(
   }
 );
 
-const CouponModel = mongoose.model("coupon", couponSchema);
+const CouponModel = mongoose.model<Data>("coupon", couponSchema);
 export default CouponModel;

@@ -1,25 +1,24 @@
-import { NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 interface Data {
-  couponCode:number,
-  expiry:string,
-  title:string,
-  description:string[],
-  paymentMode:string,
-  discount:number,
+  couponCode: number;
+  expiry: string;
+  title: string;
+  description: string[];
+  paymentMode: string;
+  discount: number;
 }
-const checkAllFields = (req: Request, res:Response, next: NextFunction)=>{
-  const data = req.body;
-  // const { couponCode, expiry, title, description, paymentMode, discount } = req.body;
-  // console.log(couponCode, expiry, title, description,paymentMode,discount);
-  // if (couponCode && expiry && title && description && paymentMode && discount) {
-    // console.log(couponCode, expiry, title, description, paymentMode, discount);
-    if(data ){
-      console.log(data);
+const checkAllFields = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const data: Data = req.body;
+  if (data.couponCode &&data.description && data.discount && data.expiry && data.paymentMode && data.title) {
+    console.log(data);
     next();
   } else {
-    // @ts-ignore
-    res.status(406).json("fill all the fields");
+    res.status(400).json("fill all the fields");
   }
 };
 
-export { checkAllFields };
+export default checkAllFields;

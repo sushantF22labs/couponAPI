@@ -54,7 +54,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 const server = app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         mongoose.set('strictQuery', true);
-        yield mongoose.connect(process.env.MONGODB_URL);
+        yield mongoose.connect(process.env.MONGODB_URL || "");
         console.log("Connected to MongoDB!");
     }
     catch (e) {

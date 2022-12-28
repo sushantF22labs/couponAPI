@@ -1,21 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
 const couponRouter = express.Router();
 import CouponModel from "./coupon.model.js";
-// @ts-ignore
-import { checkAllFields } from "./couponFields.js";
+import checkAllFields from "./couponFields.js";
+ import { Data } from "./coupon.types";
 
-interface Data{
-  couponCode:number,
-    expiry: string,
-    title: string,
-    description: string[],
-    paymentMode: string,
-    discount: {
-        percentage: string,
-        amount: number,
-    },
-}
-   const checkAllFields=(req: Request, res:Response, next: NextFunction)=>void
+
+  //  const checkAllFields=(req: Request, res:Response, next: NextFunction)=>void
 /**
  * @swagger
  * tags:
@@ -52,11 +42,9 @@ interface Data{
  */
 
 couponRouter.get("/", async (req: Request, res: Response) => {
-  // let { skip, limit } = req.query;
-  let skip1:string  = req.query.skip;
-  let limit1:string = req.query.limit;
+  let skip: number =Number(req.query.skip);
+  let limit: number =Number(req.query.limit);
  
-  console.log(req);
   try {
     if (req.query.title && req.query.couponCode) {
       const data= await CouponModel.find({
@@ -73,7 +61,7 @@ couponRouter.get("/", async (req: Request, res: Response) => {
       res.send({ data: data });
     } else {
    
-      let data = await CouponModel.find().skip(skip1).limit(limit1);
+      let data = await CouponModel.find().skip(skip).limit(limit);
       let count:number = await CouponModel.find().count();
       res
         .status(200)
@@ -105,12 +93,12 @@ couponRouter.get("/", async (req: Request, res: Response) => {
  */
 
 couponRouter.get("/:id", async (req, res) => {
-  let { skip, limit } = req.query;
+  let skip: number =Number(req.query.skip);
+  let limit: number =Number(req.query.limit);
 
   try {
-    // @ts-ignore
-    const result = await CouponModel.findById(req.params.id).skip(skip).limit(limit);
-    const count = await CouponModel.find().count();
+    const result: any = await CouponModel.findById(req.params.id).skip(skip).limit(limit);
+    const count: number = await CouponModel.find().count();
     res
       .status(200)
       .send({ data: result, count: count, message: "Get data by id" });
@@ -171,7 +159,7 @@ couponRouter.get("/:id", async (req, res) => {
 couponRouter.post("/",checkAllFields,async(req, res) => {
   let { couponCode } = req.body;
   try {
-    const checkCouponCode = await CouponModel.findOne({
+    const checkCouponCode :Data|null = await CouponModel.findOne({
       couponCode: couponCode,
     });
 

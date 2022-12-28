@@ -6,7 +6,7 @@ import "dotenv/config";
 import couponRouter from './coupon/coupon.route.js';
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
-const PORT:any = process.env.PORT || 8000;
+const PORT:number|string = process.env.PORT || 8000;
 
 const app = express();
 app.use(cors());
@@ -53,8 +53,7 @@ const server =  app.listen(PORT, async () => {
   try {
     
     mongoose.set('strictQuery', true);
-    // @ts-ignore
-    await mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(process.env.MONGODB_URL||"");
     console.log("Connected to MongoDB!");
   } catch (e) {
     console.log("something went wrong with db");
