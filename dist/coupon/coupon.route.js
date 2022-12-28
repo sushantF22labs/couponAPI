@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import express from "express";
-const couponRouter = express.Router();
 import CouponModel from "./coupon.model.js";
 import checkAllFields from "./couponFields.js";
+const couponRouter = express.Router();
 couponRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let skip = Number(req.query.skip);
     let limit = Number(req.query.limit);

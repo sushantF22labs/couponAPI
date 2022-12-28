@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
-const couponRouter = express.Router();
 import CouponModel from "./coupon.model.js";
 import checkAllFields from "./couponFields.js";
- import { Data } from "./coupon.types";
+import { Data } from "./coupon.types";
+const couponRouter = express.Router();
 
 
   //  const checkAllFields=(req: Request, res:Response, next: NextFunction)=>void
