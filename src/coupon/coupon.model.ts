@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
-import { Data } from "./coupon.types";
+// import { Data } from "./coupon.types";
+export interface Data{
+  couponCode:number,
+  expiry: string,
+  title: string,
+  description: string[],
+  paymentMode: string,
+  discount: {
+      percentage: string,
+      amount: number,
+  },
+}
+
+
 const couponSchema = new mongoose.Schema(
   {
     couponCode: { type: Number, required: true, unique: true },

@@ -1,8 +1,20 @@
 import express, { NextFunction, Request, Response } from "express";
 import CouponModel from "./coupon.model.js";
 import checkAllFields from "./couponFields.js";
-import { Data } from "./coupon.types";
+// import { Data } from "./coupon.types";
 const couponRouter = express.Router();
+export interface Data{
+  couponCode:number,
+  expiry: string,
+  title: string,
+  description: string[],
+  paymentMode: string,
+  discount: {
+      percentage: string,
+      amount: number,
+  },
+}
+
 
 
   //  const checkAllFields=(req: Request, res:Response, next: NextFunction)=>void
