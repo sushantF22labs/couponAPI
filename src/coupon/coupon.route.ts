@@ -53,7 +53,7 @@ export interface Data{
  *          description: Data not found
  */
 
-couponRouter.get("/", async (req: Request, res: Response) => {
+couponRouter.get("/coupon", async (req: Request, res: Response) => {
   let skip: number =Number(req.query.skip);
   let limit: number =Number(req.query.limit);
  
