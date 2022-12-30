@@ -2,9 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
-import couponRouter from './coupon/coupon.route';
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
+import couponRouter from "./coupon/coupon.route";
 const PORT:number|string = process.env.PORT || 8000;
 
 const app = express();
