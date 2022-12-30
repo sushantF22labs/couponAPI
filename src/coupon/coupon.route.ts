@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
-import CouponModel from "./coupon.model.js";
-import checkAllFields from "./couponFields.js";
+import CouponModel from "./coupon.model";
+import checkAllFields from "./couponFields";
 // import { Data } from "./coupon.types";
 const couponRouter = express.Router();
 export interface Data{
@@ -53,7 +53,7 @@ export interface Data{
  *          description: Data not found
  */
 
-couponRouter.get("/coupon", async (req: Request, res: Response) => {
+couponRouter.get("/", async (req: Request, res: Response) => {
   let skip: number =Number(req.query.skip);
   let limit: number =Number(req.query.limit);
  
